@@ -7,7 +7,7 @@ import { LocationContext } from '../../../services/location/LocationContext';
 
 const SearchContainer = styled(View)`
   padding: ${(props) => props.theme.space[3]};
-  background-color: ${(props) => props.theme.colors.brand.primary};
+  background-color: ${(props) => props.theme.colors.brand.aditional1};
 `;
 
 export const Search = ({ isFavouritesToggled, onFavouritesToggle }) => {

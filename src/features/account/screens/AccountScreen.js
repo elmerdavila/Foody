@@ -15,16 +15,8 @@ export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
-      <LottieAnimationWrapper>
-        <LottieView
-          key="animation"
-          resizeMode="cover"
-          autoPlay
-          loop
-          source={require('../../../../assets/animations/watermelon-lottie.json')}
-        />
-      </LottieAnimationWrapper>
-      <Title variant="caption">YumMeals</Title>
+
+      <Title variant="caption">Foody</Title>
       <AccountContainer>
         <AuthButton
           icon="lock-open-outline"
