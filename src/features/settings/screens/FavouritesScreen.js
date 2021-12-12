@@ -42,15 +42,6 @@ export const FavouritesScreen = ({ navigation }) => {
     </SafeArea>
   ) : (
     <NoFavouritesArea>
-      <LottieAnimationWrapper>
-        <LottieView
-          key="animation"
-          resizeMode="cover"
-          autoPlay
-          loop
-          source={require('../../../../assets/animations/heartbreak-lottie.json')}
-        />
-      </LottieAnimationWrapper>
       <Text variant="label">No favourites yet</Text>
     </NoFavouritesArea>
   );

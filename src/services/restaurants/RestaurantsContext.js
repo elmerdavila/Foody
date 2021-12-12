@@ -13,18 +13,26 @@ export const RestaurantsContextProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [pricelevel, setPricelevel] = useState(null);
   const { location } = useContext(LocationContext);
 
-  const retrieveRestaurants = (loc) => {
+  const retrieveRestaurants = (loc, pricelevel) => {
     setIsLoading(true);
     setRestaurants([]);
 
-    restaurantsRequest(loc)
+    restaurantsRequest(loc, pricelevel)
       .then(restaurantsTransform)
       .then((results) => {
+        let resultrestaurant = [];
+        for (let i in results) {
+          if (results[i].priceLevel == pricelevel) {
+            resultrestaurant.push(results[i]);
+            console.log('LOS3CORES', results[i]);
+          }
+        }
         setError(null);
         setIsLoading(false);
-        setRestaurants(results);
+        setRestaurants(resultrestaurant);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -35,12 +43,14 @@ export const RestaurantsContextProvider = ({ children }) => {
   useEffect(() => {
     if (location) {
       const locationString = `${location.lat},${location.lng}`;
-      retrieveRestaurants(locationString);
+      retrieveRestaurants(locationString, pricelevel);
     }
-  }, [location]);
+  }, [location, pricelevel]);
 
   return (
-    <RestaurantsContext.Provider value={{ restaurants, isLoading, error }}>
+    <RestaurantsContext.Provider
+      value={{ restaurants, isLoading, error, pricelevel, setPricelevel }}
+    >
       {children}
     </RestaurantsContext.Provider>
   );

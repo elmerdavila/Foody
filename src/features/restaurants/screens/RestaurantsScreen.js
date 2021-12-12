@@ -15,6 +15,7 @@ import { RestaurantInfoCard } from '../components/RestaurantInfoCard';
 import { LocationContext } from '../../../services/location/LocationContext';
 import { RestaurantsContext } from '../../../services/restaurants/RestaurantsContext';
 import { FavouritesContext } from '../../../services/favourites/FavouritesContext';
+import Slider from '@react-native-community/slider';
 
 const LoadingContainer = styled(View)`
   position: absolute;
@@ -28,11 +29,15 @@ const Loading = styled(ActivityIndicator)`
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { error: locationError } = useContext(LocationContext);
-  const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+  const { restaurants, isLoading, error, pricelevel, setPricelevel } =
+    useContext(RestaurantsContext);
   const { favourites } = useContext(FavouritesContext);
   const [isToggled, setIsToggled] = useState(false);
   const hasError = !!error || !!locationError;
 
+  const handleSliderChange = (value) => {
+    setPricelevel(value);
+  };
   return (
     <SafeArea>
       {isLoading && (
@@ -43,6 +48,14 @@ export const RestaurantsScreen = ({ navigation }) => {
       <Search
         isFavouritesToggled={isToggled}
         onFavouritesToggle={() => setIsToggled(!isToggled)}
+      />
+      <Slider
+        style={{ padding: 5 }}
+        value={pricelevel}
+        maximumValue={4}
+        minimumValue={0}
+        step={1}
+        onValueChange={handleSliderChange}
       />
       {isToggled && (
         <FavouritesBar
