@@ -49,6 +49,9 @@ export const RestaurantsScreen = ({ navigation }) => {
         isFavouritesToggled={isToggled}
         onFavouritesToggle={() => setIsToggled(!isToggled)}
       />
+      <Text variant="error" style={{ marginLeft: 15 }}>
+        Nivel de Costo
+      </Text>
       <Slider
         style={{ padding: 5 }}
         value={pricelevel}
